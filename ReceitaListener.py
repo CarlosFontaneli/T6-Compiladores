@@ -53,6 +53,15 @@ class ReceitaListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by ReceitaParser#quantidade.
+    def enterQuantidade(self, ctx:ReceitaParser.QuantidadeContext):
+        pass
+
+    # Exit a parse tree produced by ReceitaParser#quantidade.
+    def exitQuantidade(self, ctx:ReceitaParser.QuantidadeContext):
+        pass
+
+
     # Enter a parse tree produced by ReceitaParser#medida.
     def enterMedida(self, ctx:ReceitaParser.MedidaContext):
         pass

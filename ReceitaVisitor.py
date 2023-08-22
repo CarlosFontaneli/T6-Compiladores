@@ -34,6 +34,11 @@ class ReceitaVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
+    # Visit a parse tree produced by ReceitaParser#quantidade.
+    def visitQuantidade(self, ctx:ReceitaParser.QuantidadeContext):
+        return self.visitChildren(ctx)
+
+
     # Visit a parse tree produced by ReceitaParser#medida.
     def visitMedida(self, ctx:ReceitaParser.MedidaContext):
         return self.visitChildren(ctx)

@@ -17,11 +17,11 @@ prescricao         :   LINE_BREAK? remedio LINE_BREAK
 // É possível agrupar remédios no período (diurno, matutino ou noturno) de aplicação
 periodo           : ('Diurno' | 'Matutino' | 'Noturno') ;
 
-// Dosagem é composta por uma QUANTIDADE e uma unidade de medida
-dosagem           : QUANTIDADE '/' medida ;
+// Dosagem é composta por uma quantidade e uma unidade de medida
+dosagem           : quantidade '/' medida ;
 
-// QUANTIDADE da dosagem
-QUANTIDADE        : '(' [0-9][0-9] ')' ;
+// quantidade da dosagem
+quantidade        : '(' NUMERO ')' ;
 
 // Medidas são compostas por comprimidos, mililitros ou miligramas
 medida			:  ('Comprimidos' | 'Mililitros' | 'Miligramas' | 'comp.' | 'ml.' | 'mg.') WS?  ;
@@ -40,6 +40,9 @@ REMEDIO			: [A-Z][a-z]*;
 
 // Texto genérico
 TEXTO            : .;
+
+NUMERO			: [0-9]+ ;
+
 
 SIMBOLO_INVALIDO : '!' | '#' | '$' | '%' | '*' | '=' | '+' | '?' | '<' | '>' | '|' | ':' | '{' | '}' | '[' | ']' ;
 
