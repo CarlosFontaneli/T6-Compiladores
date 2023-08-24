@@ -17,7 +17,7 @@ class ReceitaSemantico(ReceitaVisitor):
     ## Isso é feito para que, ao dar match em cada regra da gramática, o programa tenha o comportamento desejado
 
     ## Visita a primeira regra da gramática
-    def Receita(self, ctx: ReceitaParser.ReceitaContext):
+    def Receita(self, ctx: ReceitaParser.Receita_medicaContext):
         self.visitRemedios(ctx.contatos())
         self.chekPeriodo()
 
@@ -182,10 +182,10 @@ class ReceitaSemantico(ReceitaVisitor):
     ## Caso essas regras sejam compostas por outras, a string a ser retornada é montada a partir
     ## da visita a essas; caso contrário, é retornado apenas o texto reconhecido (ctx.getText())
 
-    def visitRemedio(self, ctx: ReceitaParser.remedioContext):
+    def visitRemedio(self, ctx: ReceitaParser.RemedioContext):
         return ctx.getText()
 
-    def visitDosagem(self, ctx: ReceitaParser.dosagemContext):
+    def visitDosagem(self, ctx: ReceitaParser.DosagemContext):
         quantidade = self.visitQuantidade(ctx.quantidade())
         medida = self.visitMedida(ctx.medida())
 
@@ -217,35 +217,7 @@ class ReceitaSemantico(ReceitaVisitor):
 
         return aplicacao
 
-    def visitDescritor_rua(self, ctx: ReceitaParser.Descritor_ruaContext):
-        return ctx.getText()
-
-    def visitRua(self, ctx: ReceitaParser.RuaContext):
-        remedio_rua = self.visitDescritor_rua(ctx.descritor_rua())
-        remedio_rua += " " + ctx.n1.text
-
-        if ctx.n2 is not None:
-            for n in ctx.n2:
-                remedio_rua += " " + n.text
-
-        return remedio_rua
-
-    def visitBairro(self, ctx: ReceitaParser.BairroContext):
-        return ctx.getText()
-
-    def visitCidade(self, ctx: ReceitaParser.CidadeContext):
-        return ctx.getText()
-
-    def visitUf(self, ctx: ReceitaParser.UfContext):
-        return ctx.getText()
-
-    def visitCep(self, ctx: ReceitaParser.CepContext):
-        return ctx.getText()
-
-    def visitPais(self, ctx: ReceitaParser.PaisContext):
-        return ctx.getText()
-
-    def visitPeriodo(self, ctx: ReceitaParser.periodoContext):
+    def visitPeriodo(self, ctx: ReceitaParser.PeriodoContext):
         if ctx.remedio_periodo(0).remedio() is not None:
             return (ctx.getText(), ctx.remedio_periodo(0).remedio_g)
         return (ctx.getText(), ctx.remedio_periodo(0).letra)

@@ -19,7 +19,7 @@ class ReceitaGerador(ReceitaVisitor):
         self.periodos = {}
         self.pescricao_periodo = {}
 
-    def visitReceita(self, ctx: ReceitaParser.ReceitaContext):
+    def visitReceita(self, ctx: ReceitaParser.Receita_medicaContext):
         self.utils.adicionarCodigo("<html>\n")
         self.utils.adicionarCodigo("<body>\n")
         self.utils.adicionarCodigo("<center>\n")  ## deixa texto centralizado
@@ -116,7 +116,7 @@ class ReceitaGerador(ReceitaVisitor):
         self.utils.adicionarCodigo("</body>\n")
         self.utils.adicionarCodigo("</html>\n")
 
-    def visitRemedio(self, ctx: ReceitaParser.ContatoContext):
+    def visitRemedio(self, ctx: ReceitaParser.RemedioContext):
         remedio = self.visitRemedio(ctx.remedio())
         periodo = None
         dosagem = []
@@ -144,7 +144,7 @@ class ReceitaGerador(ReceitaVisitor):
         else:
             self.periodos[periodo][remedio] = (dosagem, indicacao, aplicacao)
 
-    def visitPeriodo(self, ctx: ReceitaParser.GrupoContext):
+    def visitPeriodo(self, ctx: ReceitaParser.PeriodoContext):
         tempo_periodo = ctx.getText()
         ## Se o grupo ñ havia sido referenciado antes,
         ## cria um novo grupo com aquele remedio como identificador
@@ -153,7 +153,7 @@ class ReceitaGerador(ReceitaVisitor):
 
         return tempo_periodo
 
-    def visitDosagem(self, ctx: ReceitaParser.dosagemContext):
+    def visitDosagem(self, ctx: ReceitaParser.DosagemContext):
         if ctx.quantidade() is not None:
             quantidade = self.visitQuantidade(ctx.quantidade())
         if ctx.medida() is not None:
