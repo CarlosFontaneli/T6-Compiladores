@@ -1,0 +1,12 @@
+<html>
+<body>
+<center>
+<p>
+Remédio: Paracetamol<br>
+Período: Diurno<br>
+Indicação: 500 Miligramas<br>
+Indicação: Indicação: Dor de cabeça<br>
+</p>
+</center>
+</body>
+</html>

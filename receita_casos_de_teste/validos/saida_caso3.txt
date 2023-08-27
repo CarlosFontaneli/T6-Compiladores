@@ -1,0 +1,12 @@
+<html>
+<body>
+<center>
+<p>
+Remédio: Ibuprofeno<br>
+Período: Noturno<br>
+Indicação: 600 Miligramas<br>
+Aplicação: Oral<br>
+</p>
+</center>
+</body>
+</html>

@@ -1,4 +1,3 @@
-# !/usr/bin/env python
 ## coding: utf-8
 
 import sys
@@ -11,7 +10,7 @@ from ReceitaListener import ReceitaListener
 from ReceitaVisitor import ReceitaVisitor
 from ReceitaGerador import ReceitaGerador
 from ReceitaSemantico import ReceitaSemantico
-from receita_utils import ReceitaUtils
+from ReceitaUtils import ReceitaUtils
 
 ## Símbolos não permitidos
 invalid_symbols = [
@@ -27,7 +26,6 @@ invalid_symbols = [
     ">",
     "|",
     ":",
-    "/",
     "{",
     "}",
     "[",
@@ -68,7 +66,7 @@ class ReceitaErrorListener(ErrorListener):
 
 def main(argv):
     ## Obtenção dos parâmetros da linha de comando
-    input = FileStream(argv[1])
+    input = FileStream(argv[1], encoding="utf-8")
     output_file = argv[2]
 
     global arquivo
@@ -78,9 +76,9 @@ def main(argv):
     lexer.removeErrorListeners()
     stream = CommonTokenStream(lexer)
     parser = ReceitaParser(stream)
-    parser.removeErrorListeners()
-    parser.addErrorListener(ReceitaErrorListener())
-    tree = parser.Receita()
+    # parser.removeErrorListeners()
+    # parser.addErrorListener(ReceitaErrorListener())
+    tree = parser.receita_medica()
 
     printer = ReceitaListener()
     walker = ParseTreeWalker()
@@ -89,12 +87,12 @@ def main(argv):
     # Análise semântica
     utils = ReceitaUtils(output_file, tree)
     s = ReceitaSemantico(utils)
-    s.visitReceita(tree)
+    s.visitReceita_medica(tree)
 
     # A geração de código é feita somente se não houver nenhum erro semântico
     if len(utils.errosSemanticos) == 0:
         c = ReceitaGerador(utils)
-        c.visitReceita(tree)
+        c.visitReceita_medica(tree)
 
     # Fechamento do arquivo / gravação do buffer
     arquivo.close()

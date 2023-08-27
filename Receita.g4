@@ -1,50 +1,39 @@
 grammar Receita;
 
-// Esta é uma linguagem para escrever uma receita médica
-
 receita_medica : prescricoes EOF;
 
-// Uma receita deve ser composta por uma ou mais prescrições
 prescricoes : prescricao+;
 
-prescricao         :   LINE_BREAK? remedio LINE_BREAK 
-                    ( periodo LINE_BREAK )?
-					( dosagem LINE_BREAK 
-                    | indicacao LINE_BREAK 
-                    | aplicacao LINE_BREAK )+
-                  ;
+prescricao : LINE_BREAK? remedio LINE_BREAK 
+            ( periodo LINE_BREAK )+ 
+            ( dosagem LINE_BREAK  
+            | indicacao LINE_BREAK 
+            | aplicacao LINE_BREAK)+;
 
-// É possível agrupar remédios no período (diurno, matutino ou noturno) de aplicação
-periodo           : ('Diurno' | 'Matutino' | 'Noturno') ;
 
-// Dosagem é composta por uma quantidade e uma unidade de medida
-dosagem           : quantidade '/' medida ;
+periodo : ('Diurno' | 'Matutino' | 'Noturno');
 
-// quantidade da dosagem
-quantidade        : '(' NUMERO ')' ;
+dosagem : ('Dosagem:')* quantidade (WS)? medida;
 
-// Medidas são compostas por comprimidos, mililitros ou miligramas
-medida			:  ('Comprimidos' | 'Mililitros' | 'Miligramas' | 'comp.' | 'ml.' | 'mg.') WS?  ;
+quantidade : NUMERO*;
+NUMERO : [0-9]+;
 
-// Indicação do remédio
-indicacao        : 'Indicação:' TEXTO;
+medida : UNIDADE*;
+UNIDADE : ('Comprimidos' | 'Mililitros' | 'Miligramas' | 'comp.' | 'ml.' | 'mg.');
 
-// Aplicação são dispostas em via oral, retal e intravenosa
-aplicacao : ('Oral' | 'Retal' | 'Intravenosa');
 
-// Uma prescrição tem, no mínimo, um remédio
-remedio   		: REMEDIO (WS REMEDIO)* ;
+indicacao : ('Indicação:')* TEXTO;
 
-// Remédios devem iniciar com letra maiúscula e podem ser compostos de uma ou mais letras
-REMEDIO			: [A-Z][a-z]*; 
+aplicacao : ('Aplicação:')* ('Oral' | 'Retal' | 'Intravenosa');
 
-// Texto genérico
-TEXTO            : .;
+remedio : REMEDIO (WS REMEDIO)* ;
 
-NUMERO			: [0-9]+ ;
+REMEDIO : [A-Z][a-z]*;
 
-SIMBOLO_INVALIDO : '!' | '#' | '$' | '%' | '*' | '=' | '+' | '?' | '<' | '>' | '|' | ':' | '{' | '}' | '[' | ']' ;
 
-LINE_BREAK		: '\n' ;
 
-WS				: ' ' ;
+LINE_BREAK : '\n';
+
+WS : ' ';
+
+TEXTO : ~('\n')+;

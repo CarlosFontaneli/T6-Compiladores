@@ -1,0 +1,13 @@
+<html>
+<body>
+<center>
+<p>
+Remédio: Dipirona<br>
+Período: Matutino<br>
+Indicação: 300 Miligramas<br>
+Indicação: Indicação: Febre<br>
+Aplicação: Oral<br>
+</p>
+</center>
+</body>
+</html>
