@@ -14,7 +14,7 @@ class ReceitaSemantico(ReceitaVisitor):
 
     # Visita a primeira regra da gramática
     def visitReceita_medica(self, ctx: ReceitaParser.Receita_medicaContext):
-        return self.visitChildren(ctx)
+        return self.visitPrescricoes(ctx.prescricoes())
 
     def visitPrescricoes(self, ctx: ReceitaParser.PrescricoesContext):
         return self.visitChildren(ctx)

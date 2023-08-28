@@ -34,40 +34,38 @@ class ReceitaGerador(ReceitaVisitor):
 
     def visitPrescricao(self, ctx: ReceitaParser.PrescricaoContext):
         self.utils.adicionarCodigo("<p>\n")
+        print(f"Remedio {self.visitRemedio(ctx.remedio())}")
         self.utils.adicionarCodigo(f"Remédio: {self.visitRemedio(ctx.remedio())}<br>\n")
 
         # Tratar período (repetido)
-        periodos = ctx.periodo()
-        if periodos:
+        periodo = ctx.periodo()
+        if periodo is not None:
             self.utils.adicionarCodigo("Período:")
-            for periodo in periodos:
-                self.utils.adicionarCodigo(f" {self.visitPeriodo(periodo)}")
+            print(f"Periodo {self.visitPeriodo(periodo)}")
+            self.utils.adicionarCodigo(f" {self.visitPeriodo(periodo)}")
             self.utils.adicionarCodigo("<br>\n")
 
         # Tratar dosagem (opcional, repetida)
-        dosagens = ctx.dosagem()
-        if dosagens:
-            for dosagem in dosagens:
-                self.utils.adicionarCodigo(
-                    f"Dosagem: {self.visitDosagem(dosagem)}<br>\n"
-                )
-
-        # Tratar indicação (opcional, repetida)
-        indicacoes = ctx.indicacao()
-        if indicacoes:
-            for indicacao in indicacoes:
-                self.utils.adicionarCodigo(
-                    f"Indicação: {self.visitIndicacao(indicacao)}<br>\n"
-                )
+        dosagem = ctx.dosagem()
+        if dosagem is not None:
+            print(f"Dosagem {self.visitDosagem(dosagem)}")
+            self.utils.adicionarCodigo(f"Dosagem: {self.visitDosagem(dosagem)}<br>\n")
 
         # Tratar aplicação (opcional, repetida)
-        aplicacoes = ctx.aplicacao()
-        if aplicacoes:
-            for aplicacao in aplicacoes:
-                self.utils.adicionarCodigo(
-                    f"Aplicação: {self.visitAplicacao(aplicacao)}<br>\n"
-                )
+        aplicacao = ctx.aplicacao()
+        if aplicacao is not None:
+            print(f"Aplicacao: {self.visitAplicacao(aplicacao)}")
+            self.utils.adicionarCodigo(
+                f"Aplicação: {self.visitAplicacao(aplicacao)}<br>\n"
+            )
 
+        # Tratar indicação (opcional, repetida)
+        indicacao = ctx.indicacao()
+        if indicacao is not None:
+            print(f"Indicacao: {self.visitIndicacao(indicacao)}")
+            self.utils.adicionarCodigo(
+                f"Indicação: {self.visitIndicacao(indicacao)}<br>\n"
+            )
         self.utils.adicionarCodigo("</p>\n")
 
     def visitRemedio(self, ctx: ReceitaParser.RemedioContext):

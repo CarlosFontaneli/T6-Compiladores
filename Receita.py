@@ -76,8 +76,8 @@ def main(argv):
     lexer.removeErrorListeners()
     stream = CommonTokenStream(lexer)
     parser = ReceitaParser(stream)
-    # parser.removeErrorListeners()
-    # parser.addErrorListener(ReceitaErrorListener())
+    parser.removeErrorListeners()
+    parser.addErrorListener(ReceitaErrorListener())
     tree = parser.receita_medica()
 
     printer = ReceitaListener()
@@ -86,8 +86,8 @@ def main(argv):
 
     # Análise semântica
     utils = ReceitaUtils(output_file, tree)
-    s = ReceitaSemantico(utils)
-    s.visitReceita_medica(tree)
+    # s = ReceitaSemantico(utils)
+    # s.visitReceita_medica(tree)
 
     # A geração de código é feita somente se não houver nenhum erro semântico
     if len(utils.errosSemanticos) == 0:

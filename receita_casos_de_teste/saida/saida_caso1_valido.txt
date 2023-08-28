@@ -4,9 +4,9 @@
 <p>
 Remédio: Dipirona<br>
 Período: Matutino<br>
-Indicação: 300 Miligramas<br>
-Indicação: Indicação: Febre<br>
+Dosagem: 300/Miligramas<br>
 Aplicação: Oral<br>
+Indicação: febre<br>
 </p>
 </center>
 </body>

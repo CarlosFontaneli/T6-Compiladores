@@ -4,8 +4,9 @@
 <p>
 Remédio: Ibuprofeno<br>
 Período: Noturno<br>
-Indicação: 600 Miligramas<br>
+Dosagem: 50/Mililitros<br>
 Aplicação: Oral<br>
+Indicação: inflamacao<br>
 </p>
 </center>
 </body>

@@ -1,0 +1,2 @@
+Linha 1: erro proximo a 'dipirona'
+Fim da compilacao
