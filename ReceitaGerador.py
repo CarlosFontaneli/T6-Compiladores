@@ -25,8 +25,8 @@ class ReceitaGerador(ReceitaVisitor):
         self.utils.adicionarCodigo("<style>\n")
         self.utils.adicionarCodigo("body { font-family: Arial, sans-serif; }\n")
         self.utils.adicionarCodigo(".container { width: 80%; margin: 0 auto; }\n")
-        self.utils.adicionarCodigo(".header { text-align: center; background-color: #f2f2f2; padding: 10px; }\n")
-        self.utils.adicionarCodigo(".prescricao { border: 1px solid #ccc; padding: 10px; margin-bottom: 20px; }\n")
+        self.utils.adicionarCodigo(".header { text-align: center; background-color: #AED6F1; padding: 10px; }\n")
+        self.utils.adicionarCodigo(".prescricao { border: 1px solid #ccc; padding: 10px; margin-bottom: 20px; font-weight: bold; }\n")
         self.utils.adicionarCodigo("</style>\n")
         self.utils.adicionarCodigo("</head>\n")
         self.utils.adicionarCodigo("<body>\n")
@@ -53,12 +53,12 @@ class ReceitaGerador(ReceitaVisitor):
     def visitPrescricao(self, ctx: ReceitaParser.PrescricaoContext):
         self.utils.adicionarCodigo("<p>\n")
         print(f"Remedio {self.visitRemedio(ctx.remedio())}")
-        self.utils.adicionarCodigo(f"Remédio: {self.visitRemedio(ctx.remedio())}<br>\n")
+        self.utils.adicionarCodigo(f"<b>Remédio</b>: {self.visitRemedio(ctx.remedio())}<br>\n")
 
         # Tratar período (repetido)
         periodo = ctx.periodo()
         if periodo is not None:
-            self.utils.adicionarCodigo("Período:")
+            self.utils.adicionarCodigo("</b>Período:</b>")
             print(f"Periodo {self.visitPeriodo(periodo)}")
             self.utils.adicionarCodigo(f" {self.visitPeriodo(periodo)}")
             self.utils.adicionarCodigo("<br>\n")
@@ -67,14 +67,14 @@ class ReceitaGerador(ReceitaVisitor):
         dosagem = ctx.dosagem()
         if dosagem is not None:
             print(f"Dosagem {self.visitDosagem(dosagem)}")
-            self.utils.adicionarCodigo(f"Dosagem: {self.visitDosagem(dosagem)}<br>\n")
+            self.utils.adicionarCodigo(f"</b>Dosagem:</b> {self.visitDosagem(dosagem)}<br>\n")
 
         # Tratar aplicação (opcional, repetida)
         aplicacao = ctx.aplicacao()
         if aplicacao is not None:
             print(f"Aplicacao: {self.visitAplicacao(aplicacao)}")
             self.utils.adicionarCodigo(
-                f"Aplicação: {self.visitAplicacao(aplicacao)}<br>\n"
+                f"</b>Aplicação:</b> {self.visitAplicacao(aplicacao)}<br>\n"
             )
 
         # Tratar indicação (opcional, repetida)
@@ -82,7 +82,7 @@ class ReceitaGerador(ReceitaVisitor):
         if indicacao is not None:
             print(f"Indicacao: {self.visitIndicacao(indicacao)}")
             self.utils.adicionarCodigo(
-                f"Indicação: {self.visitIndicacao(indicacao)}<br>\n"
+                f"</b>Indicação:</b> {self.visitIndicacao(indicacao)}<br>\n"
             )
         self.utils.adicionarCodigo("</p>\n")
 
