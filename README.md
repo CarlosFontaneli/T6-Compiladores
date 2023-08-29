@@ -110,3 +110,45 @@ python3 RodaTestes.py
 Os testes automatizados verificarão o funcionamento correto da linguagem Receita em diferentes cenários.
 
 Agora você está pronto para explorar e testar a linguagem Receita! Sinta-se à vontade para criar seus próprios programas de prescrições médicas e testá-los com os comandos fornecidos acima.
+
+# Análises Semânticas Detalhadas
+
+## 1. ReceitaSemantico.py
+
+O arquivo `ReceitaSemantico.py` contém a classe `ReceitaSemantico`, que é responsável por realizar as verificações semânticas durante a análise da linguagem de receitas médicas. As principais análises realizadas são:
+
+### 1.1. Verificação de Remédios Repetidos
+
+A função `visitPrescricoes` itera pelas prescrições de remédios e verifica se algum remédio está sendo prescrito mais de uma vez. Se um remédio já estiver presente na lista de remédios, é emitido um erro semântico indicando a repetição.
+
+### 1.2. Verificação de Dosagem Excedente
+
+A função `visitDosagem` verifica se a dosagem de um remédio não excede limites pré-definidos. Para dosagens em mililitros (ml) ou miligramas (mg), a função verifica se a quantidade é maior que 1000. Se a dosagem exceder esse valor, é emitido um erro semântico.
+
+### 1.3. Verificação de Dosagem de Comprimidos
+
+A função `checkDosagemRange` verifica se a dosagem de comprimidos não excede um limite específico (10 comprimidos). Se a quantidade exceder esse limite, é emitido um erro semântico.
+
+## 2. ReceitaGerador.py
+
+O arquivo `ReceitaGerador.py` contém a classe `ReceitaGerador`, responsável por gerar o código HTML a partir das regras da linguagem. As principais análises realizadas são:
+
+### 2.1. Geração de Código HTML
+
+A função `visitReceita_medica` gera o código HTML para representar uma receita médica. Isso inclui as prescrições de remédios, períodos, dosagens, aplicações e indicações. Cada parte da prescrição é formatada conforme as regras definidas.
+
+## 3. ReceitaUtils.py
+
+O arquivo `ReceitaUtils.py` contém a classe `ReceitaUtils`, que é responsável por armazenar erros semânticos e o código HTML gerado. A análise semântica em si não é realizada nesse arquivo, mas ele é utilizado para coletar informações relevantes e gerar a saída.
+
+### 3.1. Armazenamento de Erros Semânticos
+
+A função `adicionarErroSemantico` armazena erros semânticos em uma lista para posterior exibição ou gravação. Isso permite que erros como remédios repetidos ou dosagens excedentes sejam registrados durante a análise semântica.
+
+### 3.2. Armazenamento de Código Gerado
+
+A função `adicionarCodigo` armazena o código HTML gerado em uma lista, para posterior gravação em um arquivo. Isso permite que o código gerado seja mantido em memória antes de ser gravado no arquivo de saída.
+
+---
+
+As análises semânticas detalhadas acima garantem que a linguagem de receitas médicas seja analisada corretamente e que erros semânticos sejam identificados e relatados de maneira apropriada.
