@@ -1,6 +1,6 @@
 // Esta é uma linguagem para descrever prescrições médicas (medicamentos, período, dosagem, aplicação e indicação).
 
-// Uma prescrição médica é composta por um ou mais contatos.
+// Uma prescrição médica é composta por um ou mais prescricoes.
 receita_medica : prescricoes EOF;
 
 // Para compor a lista de prescrições, é necessário ter pelo menos uma prescrição.
