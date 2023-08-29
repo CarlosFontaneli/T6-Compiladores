@@ -38,10 +38,10 @@ class ReceitaGerador(ReceitaVisitor):
         
         self.utils.adicionarCodigo("<div class='prescricao'>\n")
         self.utils.adicionarCodigo("<h2>Prescrições</h2>\n")
-        self.visitPrescricoes(ctx.prescricoes())  # Preencha essa parte de acordo com sua implementação
+        self.visitPrescricoes(ctx.prescricoes())  
         self.utils.adicionarCodigo("</div>\n")
         
-        self.utils.adicionarCodigo("</div>\n")  # Fim do container
+        self.utils.adicionarCodigo("</div>\n") 
         
         self.utils.adicionarCodigo("</body>\n")
         self.utils.adicionarCodigo("</html>\n")
