@@ -17,6 +17,6 @@ for test_case_file in test_case_files:
     # Executa o comando
     try:
         subprocess.run(command, shell=True, check=True)
-        print(f"Execução bem-sucedida para {test_case_file}")
+        print(f"Execução para {test_case_file}")
     except subprocess.CalledProcessError as e:
         print(f"Erro ao executar {test_case_file}: {e}")
