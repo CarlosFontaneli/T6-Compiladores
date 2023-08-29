@@ -86,14 +86,13 @@ def main(argv):
 
     # Análise semântica
     utils = ReceitaUtils(output_file, tree)
-    # s = ReceitaSemantico(utils)
-    # s.visitReceita_medica(tree)
+    s = ReceitaSemantico(utils)
+    s.visitReceita_medica(tree)
 
     # A geração de código é feita somente se não houver nenhum erro semântico
     if len(utils.errosSemanticos) == 0:
         c = ReceitaGerador(utils)
         c.visitReceita_medica(tree)
-
     # Fechamento do arquivo / gravação do buffer
     arquivo.close()
 

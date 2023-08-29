@@ -1,47 +1,58 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-from ReceitaVisitor import ReceitaVisitor
+from antlr4 import *
 from ReceitaParser import ReceitaParser
+from ReceitaVisitor import ReceitaVisitor
 
 
 class ReceitaSemantico(ReceitaVisitor):
-    # Inicializações de listas e dicionários a serem utilizados
     def __init__(self, utils):
         self.utils = utils
         self.prescricoes = []
-        self.periodos = {}
-
-    # Visita a primeira regra da gramática
-    def visitReceita_medica(self, ctx: ReceitaParser.Receita_medicaContext):
-        return self.visitPrescricoes(ctx.prescricoes())
+        self.remedios = []
 
     def visitPrescricoes(self, ctx: ReceitaParser.PrescricoesContext):
-        return self.visitChildren(ctx)
+        for prescricao in ctx.prescricao():
+            dados = self.visitPrescricao(prescricao)
+            self.checkDosagem(dados["dosagem"])
+            self.prescricoes.append(dados)
 
     def visitPrescricao(self, ctx: ReceitaParser.PrescricaoContext):
+        remedio = ctx.remedio().getText()
+
+        if remedio in self.remedios:
+            self.utils.adicionarErroSemantico(
+                remedio, mensagem=f"Repeticação de remédio: {remedio}"
+            )
+        else:
+            self.remedios.append(remedio)
+        periodo = ctx.periodo().getText()
+        dosagem = self.visitDosagem(ctx.dosagem())
+        aplicacao = ctx.aplicacao().getText() if ctx.aplicacao() else None
+        indicacao = ctx.indicacao().getText() if ctx.indicacao() else None
         return {
-            "remedio": self.visitRemedio(ctx.remedio()),
-            "periodo": [self.visitPeriodo(p) for p in ctx.periodo()],
-            "dosagem": [self.visitDosagem(p) for p in ctx.dosagem()],
-            "indicacao": [self.visitIndicacao(p) for p in ctx.indicacao()],
-            "aplicacao": [self.visitAplicacao(p) for p in ctx.aplicacao()],
+            "remedio": remedio,
+            "periodo": periodo,
+            "dosagem": dosagem,
+            "aplicacao": aplicacao,
+            "indicacao": indicacao,
         }
 
-    def visitRemedio(self, ctx: ReceitaParser.RemedioContext):
-        return ctx.getText()
-
     def visitDosagem(self, ctx: ReceitaParser.DosagemContext):
-        return self.visitChildren(ctx)
+        quantidade = int(ctx.quantidade().getText())
+        medida = ctx.medida().getText()
+        self.checkDosagemRange(quantidade, medida)
+        return {"quantidade": quantidade, "medida": medida}
 
-    def visitMedida(self, ctx: ReceitaParser.MedidaContext):
-        return ctx.getText()
+    def checkDosagem(self, dosagem):
+        if dosagem["medida"] == "Mililitros" or dosagem["medida"] == "Miligramas":
+            if dosagem["quantidade"] > 1000:
+                self.utils.adicionarErroSemantico(
+                    dosagem["quantidade"],
+                    mensagem=f"Dosagem excede 1000 {dosagem['medida']}",
+                )
 
-    def visitIndicacao(self, ctx: ReceitaParser.IndicacaoContext):
-        return ctx.getText()
-
-    def visitAplicacao(self, ctx: ReceitaParser.AplicacaoContext):
-        return ctx.getText()
-
-    def visitPeriodo(self, ctx: ReceitaParser.PeriodoContext):
-        return ctx.getText()
+    def checkDosagemRange(self, quantidade, medida):
+        if medida == "Comprimidos":
+            if quantidade > 10:
+                self.utils.adicionarErroSemantico(
+                    quantidade, mensagem=f"Dosagem excede 10 {medida}"
+                )

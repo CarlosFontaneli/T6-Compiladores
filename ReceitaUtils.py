@@ -11,6 +11,7 @@ class ReceitaUtils:
     ## Procedimento que adiciona a mensagem de erro na lista correspondente
     def adicionarErroSemantico(self, t, mensagem):
         linha = t.line
+        print(mensagem)
         self.errosSemanticos.append(f"Linha {linha}: {mensagem}")
 
     ## Procedimento que adiciona o código HTML na lista correspondente
