@@ -21,10 +21,28 @@ class ReceitaGerador(ReceitaVisitor):
 
     def visitReceita_medica(self, ctx: ReceitaParser.Receita_medicaContext):
         self.utils.adicionarCodigo("<html>\n")
+        self.utils.adicionarCodigo("<head>\n")
+        self.utils.adicionarCodigo("<style>\n")
+        self.utils.adicionarCodigo("body { font-family: Arial, sans-serif; }\n")
+        self.utils.adicionarCodigo(".container { width: 80%; margin: 0 auto; }\n")
+        self.utils.adicionarCodigo(".header { text-align: center; background-color: #f2f2f2; padding: 10px; }\n")
+        self.utils.adicionarCodigo(".prescricao { border: 1px solid #ccc; padding: 10px; margin-bottom: 20px; }\n")
+        self.utils.adicionarCodigo("</style>\n")
+        self.utils.adicionarCodigo("</head>\n")
         self.utils.adicionarCodigo("<body>\n")
-        self.utils.adicionarCodigo("<center>\n")  # deixa texto centralizado
-        self.visitPrescricoes(ctx.prescricoes())
-        self.utils.adicionarCodigo("</center>\n")
+        
+        self.utils.adicionarCodigo("<div class='container'>\n")
+        self.utils.adicionarCodigo("<div class='header'>\n")
+        self.utils.adicionarCodigo("<h1>Receita Médica</h1>\n")
+        self.utils.adicionarCodigo("</div>\n")
+        
+        self.utils.adicionarCodigo("<div class='prescricao'>\n")
+        self.utils.adicionarCodigo("<h2>Prescrições</h2>\n")
+        self.visitPrescricoes(ctx.prescricoes())  # Preencha essa parte de acordo com sua implementação
+        self.utils.adicionarCodigo("</div>\n")
+        
+        self.utils.adicionarCodigo("</div>\n")  # Fim do container
+        
         self.utils.adicionarCodigo("</body>\n")
         self.utils.adicionarCodigo("</html>\n")
 
