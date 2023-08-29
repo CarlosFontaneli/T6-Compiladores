@@ -26,7 +26,7 @@ class ReceitaGerador(ReceitaVisitor):
         self.utils.adicionarCodigo("body { font-family: Arial, sans-serif; }\n")
         self.utils.adicionarCodigo(".container { width: 80%; margin: 0 auto; }\n")
         self.utils.adicionarCodigo(".header { text-align: center; background-color: #AED6F1; padding: 10px; }\n")
-        self.utils.adicionarCodigo(".prescricao { border: 1px solid #ccc; padding: 10px; margin-bottom: 20px; font-weight: bold; }\n")
+        self.utils.adicionarCodigo(".prescricao { border: 1px solid #ccc; padding: 10px; margin-bottom: 20px;}\n")
         self.utils.adicionarCodigo("</style>\n")
         self.utils.adicionarCodigo("</head>\n")
         self.utils.adicionarCodigo("<body>\n")
