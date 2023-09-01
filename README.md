@@ -1,3 +1,13 @@
+# Autores
+
+### Aquila Oliveira, 759313
+
+### Carlos Eduardo Fontaneli , 769949
+
+### Ingrid Lira dos Santos, 790888
+
+## [Vídeo Explicativo Sobre a Linguagem:](https://drive.google.com/file/d/12v9iCT0SsVgJGvGxYeyJExYdzhF9dYmd/view?usp=sharing)
+
 # Linguagem Receita
 
 A linguagem Receita é utilizada para descrever prescrições médicas, indicando o medicamento a ser tomado, o período em que deve ser tomado, a dosagem a ser administrada, além de opcionalmente incluir a aplicação e a indicação da prescrição. Neste arquivo, explicaremos como a linguagem funciona, fornecendo exemplos de código e instruções para testar e executar programas escritos na linguagem Receita.
